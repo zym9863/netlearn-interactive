@@ -17,13 +17,6 @@ const Container = styled.div`
   margin-bottom: ${theme.space.xl};
 `;
 
-const DeviceContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: ${theme.space.xl};
-  height: 100%;
-`;
-
 const DeviceGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
