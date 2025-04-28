@@ -22,36 +22,35 @@ const DNSPage = () => {
   return (
     <>
       <PageHeader>
-        <Title>DNS Protocol</Title>
+        <Title>DNS 协议</Title>
         <Description>
-          Domain Name System (DNS) is a hierarchical and decentralized naming system for computers, services,
-          or other resources connected to the Internet or a private network. It translates domain names to
-          the numerical IP addresses needed for locating and identifying computer services and devices.
+          域名系统（DNS）是一个用于计算机、服务或其他连接到互联网或私有网络的资源的分层分散式命名系统。
+          它将域名转换为定位和识别计算机服务和设备所需的数字IP地址。
         </Description>
       </PageHeader>
-      
-      <InfoCard title="What is DNS?">
+
+      <InfoCard title="什么是DNS？">
         <p>
-          DNS is essentially the phone book of the Internet. Humans access information online through domain
-          names, like example.com. Web browsers interact through Internet Protocol (IP) addresses. DNS
-          translates domain names to IP addresses so browsers can load Internet resources.
+          DNS本质上是互联网的电话簿。人们通过域名（如example.com）在线访问信息。
+          网络浏览器通过互联网协议（IP）地址进行交互。DNS将域名转换为IP地址，
+          使浏览器能够加载互联网资源。
         </p>
       </InfoCard>
-      
-      <InfoCard title="DNS Query Process" type="info">
+
+      <InfoCard title="DNS查询过程" type="info">
         <p>
-          The DNS query process involves several steps:
+          DNS查询过程包括几个步骤：
         </p>
         <ol>
-          <li><strong>DNS Resolver</strong>: Your computer first contacts a DNS resolver (usually provided by your ISP).</li>
-          <li><strong>Root Nameserver</strong>: If the resolver doesn't have the answer cached, it asks a root nameserver.</li>
-          <li><strong>TLD Nameserver</strong>: The root server directs the resolver to a TLD (Top-Level Domain) nameserver.</li>
-          <li><strong>Authoritative Nameserver</strong>: The TLD server directs the resolver to the authoritative nameserver.</li>
-          <li><strong>IP Address</strong>: The authoritative nameserver provides the IP address for the domain.</li>
-          <li><strong>Response</strong>: The resolver returns the IP address to your computer.</li>
+          <li><strong>DNS解析器</strong>：您的计算机首先联系DNS解析器（通常由您的ISP提供）。</li>
+          <li><strong>根名称服务器</strong>：如果解析器没有缓存答案，它会询问根名称服务器。</li>
+          <li><strong>TLD名称服务器</strong>：根服务器将解析器引导到TLD（顶级域）名称服务器。</li>
+          <li><strong>权威名称服务器</strong>：TLD服务器将解析器引导到权威名称服务器。</li>
+          <li><strong>IP地址</strong>：权威名称服务器提供域名的IP地址。</li>
+          <li><strong>响应</strong>：解析器将IP地址返回给您的计算机。</li>
         </ol>
       </InfoCard>
-      
+
       <DNSQuery />
     </>
   );

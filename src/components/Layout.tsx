@@ -103,7 +103,7 @@ const Layout = ({ children }: LayoutProps) => {
           </Logo>
           <Nav>
             <NavLink to="/" $active={location.pathname === '/'}>
-              <FaHome /> Home
+              <FaHome /> 首页
             </NavLink>
             <NavLink to="/tcp" $active={location.pathname === '/tcp'}>
               <FaNetworkWired /> TCP
@@ -119,7 +119,7 @@ const Layout = ({ children }: LayoutProps) => {
       </Header>
       <Main>{children}</Main>
       <Footer>
-        <p>© {new Date().getFullYear()} NetLearn Interactive. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} 网络学习互动平台. 保留所有权利.</p>
       </Footer>
     </LayoutContainer>
   );

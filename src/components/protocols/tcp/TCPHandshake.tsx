@@ -98,19 +98,19 @@ const steps: Step[] = [
   {
     id: 1,
     packet: 'SYN',
-    description: 'Client sends a SYN packet to the server, requesting a connection and indicating its initial sequence number.',
+    description: '客户端向服务器发送SYN数据包，请求连接并指示其初始序列号。',
     direction: 'client-to-server',
   },
   {
     id: 2,
     packet: 'SYN-ACK',
-    description: 'Server responds with a SYN-ACK packet, acknowledging the client\'s request and indicating its own initial sequence number.',
+    description: '服务器用SYN-ACK数据包响应，确认客户端的请求并指示其自己的初始序列号。',
     direction: 'server-to-client',
   },
   {
     id: 3,
     packet: 'ACK',
-    description: 'Client sends an ACK packet to the server, acknowledging the server\'s response. The connection is now established.',
+    description: '客户端向服务器发送ACK数据包，确认服务器的响应。连接现已建立。',
     direction: 'client-to-server',
   },
 ];
@@ -119,32 +119,32 @@ const TCPHandshake = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const timerRef = useRef<number | null>(null);
-  
+
   const handlePlay = () => {
     setIsPlaying(true);
   };
-  
+
   const handlePause = () => {
     setIsPlaying(false);
   };
-  
+
   const handleReset = () => {
     setIsPlaying(false);
     setCurrentStep(0);
   };
-  
+
   const handleNext = () => {
     if (currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
     }
   };
-  
+
   const handlePrev = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
   };
-  
+
   useEffect(() => {
     if (isPlaying) {
       if (currentStep < steps.length) {
@@ -155,40 +155,40 @@ const TCPHandshake = () => {
         setIsPlaying(false);
       }
     }
-    
+
     return () => {
       if (timerRef.current !== null) {
         clearTimeout(timerRef.current);
       }
     };
   }, [isPlaying, currentStep]);
-  
+
   return (
     <>
       <Container>
         <DeviceContainer>
           <Device>
             <DeviceIcon>💻</DeviceIcon>
-            <DeviceLabel>Client</DeviceLabel>
+            <DeviceLabel>客户端</DeviceLabel>
           </Device>
-          
+
           <Device>
             <DeviceIcon>🖥️</DeviceIcon>
-            <DeviceLabel>Server</DeviceLabel>
+            <DeviceLabel>服务器</DeviceLabel>
           </Device>
         </DeviceContainer>
-        
+
         <AnimatePresence>
           {currentStep >= 1 && currentStep <= steps.length && (
             <PacketContainer
               key={steps[currentStep - 1].id}
-              initial={{ 
+              initial={{
                 x: steps[currentStep - 1].direction === 'client-to-server' ? '20%' : '80%',
-                opacity: 0 
+                opacity: 0
               }}
-              animate={{ 
+              animate={{
                 x: steps[currentStep - 1].direction === 'client-to-server' ? '80%' : '20%',
-                opacity: 1 
+                opacity: 1
               }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.5 }}
@@ -207,18 +207,18 @@ const TCPHandshake = () => {
             </PacketContainer>
           )}
         </AnimatePresence>
-        
+
         <StepDescription>
           {currentStep === 0 ? (
-            'Click Play to start the TCP three-way handshake animation.'
+            '点击播放开始TCP三次握手动画。'
           ) : currentStep <= steps.length ? (
             steps[currentStep - 1].description
           ) : (
-            'TCP connection established successfully! Click Reset to watch again.'
+            'TCP连接已成功建立！点击重置再次观看。'
           )}
         </StepDescription>
       </Container>
-      
+
       <AnimationControls
         isPlaying={isPlaying}
         onPlay={handlePlay}
@@ -229,21 +229,21 @@ const TCPHandshake = () => {
         currentStep={currentStep === 0 ? 1 : currentStep}
         totalSteps={steps.length}
       />
-      
+
       {currentStep === steps.length && (
-        <InfoCard title="Connection Established" type="success">
+        <InfoCard title="连接已建立" type="success">
           <p>
-            The TCP three-way handshake is now complete, and a connection has been established between
-            the client and server. They can now begin exchanging application data.
+            TCP三次握手现已完成，客户端和服务器之间已建立连接。
+            它们现在可以开始交换应用数据。
           </p>
           <p>
-            This connection provides:
+            此连接提供：
           </p>
           <ul>
-            <li><strong>Reliability</strong>: Guaranteed delivery of data packets</li>
-            <li><strong>Ordered delivery</strong>: Data arrives in the order it was sent</li>
-            <li><strong>Error checking</strong>: Corrupted packets are retransmitted</li>
-            <li><strong>Flow control</strong>: Prevents overwhelming the receiver</li>
+            <li><strong>可靠性</strong>：保证数据包的传递</li>
+            <li><strong>有序传递</strong>：数据按发送顺序到达</li>
+            <li><strong>错误检查</strong>：损坏的数据包会重新传输</li>
+            <li><strong>流量控制</strong>：防止接收方过载</li>
           </ul>
         </InfoCard>
       )}

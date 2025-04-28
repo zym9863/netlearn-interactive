@@ -109,7 +109,7 @@ const steps: Step[] = [
   {
     id: 1,
     packet: 'REQUEST',
-    description: 'Client sends an HTTP request to the server.',
+    description: '客户端向服务器发送HTTP请求。',
     direction: 'client-to-server',
     code: `GET /index.html HTTP/1.1
 Host: www.example.com
@@ -120,7 +120,7 @@ Connection: keep-alive`,
   {
     id: 2,
     packet: 'RESPONSE',
-    description: 'Server processes the request and sends back an HTTP response.',
+    description: '服务器处理请求并发回HTTP响应。',
     direction: 'server-to-client',
     code: `HTTP/1.1 200 OK
 Date: Mon, 23 May 2023 22:38:34 GMT
@@ -144,32 +144,32 @@ const HTTPRequest = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const timerRef = useRef<number | null>(null);
-  
+
   const handlePlay = () => {
     setIsPlaying(true);
   };
-  
+
   const handlePause = () => {
     setIsPlaying(false);
   };
-  
+
   const handleReset = () => {
     setIsPlaying(false);
     setCurrentStep(0);
   };
-  
+
   const handleNext = () => {
     if (currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
     }
   };
-  
+
   const handlePrev = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
   };
-  
+
   useEffect(() => {
     if (isPlaying) {
       if (currentStep < steps.length) {
@@ -180,40 +180,40 @@ const HTTPRequest = () => {
         setIsPlaying(false);
       }
     }
-    
+
     return () => {
       if (timerRef.current !== null) {
         clearTimeout(timerRef.current);
       }
     };
   }, [isPlaying, currentStep]);
-  
+
   return (
     <>
       <Container>
         <DeviceContainer>
           <Device>
             <DeviceIcon>🌐</DeviceIcon>
-            <DeviceLabel>Web Browser</DeviceLabel>
+            <DeviceLabel>网页浏览器</DeviceLabel>
           </Device>
-          
+
           <Device>
             <DeviceIcon>🖥️</DeviceIcon>
-            <DeviceLabel>Web Server</DeviceLabel>
+            <DeviceLabel>网页服务器</DeviceLabel>
           </Device>
         </DeviceContainer>
-        
+
         <AnimatePresence>
           {currentStep >= 1 && currentStep <= steps.length && (
             <PacketContainer
               key={steps[currentStep - 1].id}
-              initial={{ 
+              initial={{
                 x: steps[currentStep - 1].direction === 'client-to-server' ? '20%' : '80%',
-                opacity: 0 
+                opacity: 0
               }}
-              animate={{ 
+              animate={{
                 x: steps[currentStep - 1].direction === 'client-to-server' ? '80%' : '20%',
-                opacity: 1 
+                opacity: 1
               }}
               exit={{ opacity: 0 }}
               transition={{ duration: 2 }}
@@ -232,10 +232,10 @@ const HTTPRequest = () => {
             </PacketContainer>
           )}
         </AnimatePresence>
-        
+
         <StepDescription>
           {currentStep === 0 ? (
-            'Click Play to start the HTTP request/response animation.'
+            '点击播放开始HTTP请求/响应动画。'
           ) : currentStep <= steps.length ? (
             <>
               {steps[currentStep - 1].description}
@@ -244,11 +244,11 @@ const HTTPRequest = () => {
               )}
             </>
           ) : (
-            'HTTP request/response cycle completed! Click Reset to watch again.'
+            'HTTP请求/响应周期已完成！点击重置再次观看。'
           )}
         </StepDescription>
       </Container>
-      
+
       <AnimationControls
         isPlaying={isPlaying}
         onPlay={handlePlay}
@@ -259,25 +259,25 @@ const HTTPRequest = () => {
         currentStep={currentStep === 0 ? 1 : currentStep}
         totalSteps={steps.length}
       />
-      
+
       {currentStep === steps.length && (
-        <InfoCard title="HTTP Request/Response Completed" type="success">
+        <InfoCard title="HTTP请求/响应已完成" type="success">
           <p>
-            The HTTP request/response cycle is now complete. The client requested a resource from
-            the server, and the server responded with the requested data.
+            HTTP请求/响应周期现已完成。客户端从服务器请求了资源，
+            服务器用请求的数据进行了响应。
           </p>
           <p>
-            Key components of HTTP messages:
+            HTTP消息的关键组成部分：
           </p>
           <ul>
-            <li><strong>Request Line/Status Line</strong>: Contains the method (for requests) or status code (for responses)</li>
-            <li><strong>Headers</strong>: Metadata about the request or response</li>
-            <li><strong>Body</strong>: Optional data sent with the request or response</li>
+            <li><strong>请求行/状态行</strong>：包含方法（对于请求）或状态码（对于响应）</li>
+            <li><strong>头部</strong>：关于请求或响应的元数据</li>
+            <li><strong>主体</strong>：随请求或响应发送的可选数据</li>
           </ul>
           <p>
-            Common HTTP methods include GET, POST, PUT, DELETE, and more. Status codes are grouped
-            into categories: 1xx (Informational), 2xx (Success), 3xx (Redirection), 4xx (Client Error),
-            and 5xx (Server Error).
+            常见的HTTP方法包括GET、POST、PUT、DELETE等。状态码分为几类：
+            1xx（信息性）、2xx（成功）、3xx（重定向）、4xx（客户端错误）
+            和5xx（服务器错误）。
           </p>
         </InfoCard>
       )}

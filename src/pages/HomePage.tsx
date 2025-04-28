@@ -144,14 +144,14 @@ const HomePage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Welcome to NetLearn Interactive
+          欢迎使用网络学习互动平台
         </Title>
         <Subtitle
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Explore and understand network protocols through interactive visualizations and simulations
+          通过交互式可视化和模拟来探索和理解网络协议
         </Subtitle>
       </Hero>
 
@@ -170,10 +170,10 @@ const HomePage = () => {
           </CardImage>
           <CardContent>
             <CardTitle>
-              TCP Protocol
+              TCP 协议
             </CardTitle>
             <CardDescription>
-              Visualize TCP three-way handshake and four-way termination processes
+              可视化TCP三次握手和四次挥手过程
             </CardDescription>
           </CardContent>
         </ProtocolCard>
@@ -192,10 +192,10 @@ const HomePage = () => {
           </CardImage>
           <CardContent>
             <CardTitle>
-              HTTP Protocol
+              HTTP 协议
             </CardTitle>
             <CardDescription>
-              Understand HTTP request and response flow with interactive examples
+              通过交互式示例理解HTTP请求和响应流程
             </CardDescription>
           </CardContent>
         </ProtocolCard>
@@ -214,10 +214,10 @@ const HomePage = () => {
           </CardImage>
           <CardContent>
             <CardTitle>
-              DNS Protocol
+              DNS 协议
             </CardTitle>
             <CardDescription>
-              Learn how domain names are resolved through the DNS query process
+              了解域名如何通过DNS查询过程解析
             </CardDescription>
           </CardContent>
         </ProtocolCard>

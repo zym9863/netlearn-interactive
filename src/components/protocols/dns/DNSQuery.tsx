@@ -92,7 +92,7 @@ const steps: Step[] = [
   {
     id: 1,
     packet: 'QUERY',
-    description: 'Your computer sends a DNS query to the DNS resolver (usually provided by your ISP) asking for the IP address of example.com.',
+    description: '您的计算机向DNS解析器（通常由您的ISP提供）发送DNS查询，询问example.com的IP地址。',
     from: 'client',
     to: 'resolver',
     label: 'What is the IP for example.com?',
@@ -100,7 +100,7 @@ const steps: Step[] = [
   {
     id: 2,
     packet: 'QUERY',
-    description: 'If the resolver doesn\'t have the answer cached, it asks a root nameserver for information about the .com TLD.',
+    description: '如果解析器没有缓存答案，它会向根名称服务器询问有关.com顶级域的信息。',
     from: 'resolver',
     to: 'root',
     label: 'Who manages .com domains?',
@@ -108,7 +108,7 @@ const steps: Step[] = [
   {
     id: 3,
     packet: 'RESPONSE',
-    description: 'The root nameserver responds with the addresses of the TLD nameservers for .com domains.',
+    description: '根名称服务器响应.com域的TLD名称服务器的地址。',
     from: 'root',
     to: 'resolver',
     label: 'Here are the .com nameservers',
@@ -116,7 +116,7 @@ const steps: Step[] = [
   {
     id: 4,
     packet: 'QUERY',
-    description: 'The resolver then asks the TLD nameserver for information about example.com.',
+    description: '解析器然后向TLD名称服务器询问有关example.com的信息。',
     from: 'resolver',
     to: 'tld',
     label: 'Who manages example.com?',
@@ -124,7 +124,7 @@ const steps: Step[] = [
   {
     id: 5,
     packet: 'RESPONSE',
-    description: 'The TLD nameserver responds with the addresses of the authoritative nameservers for example.com.',
+    description: 'TLD名称服务器响应example.com的权威名称服务器的地址。',
     from: 'tld',
     to: 'resolver',
     label: 'Here are example.com nameservers',
@@ -132,7 +132,7 @@ const steps: Step[] = [
   {
     id: 6,
     packet: 'QUERY',
-    description: 'The resolver asks the authoritative nameserver for the IP address of example.com.',
+    description: '解析器向权威名称服务器询问example.com的IP地址。',
     from: 'resolver',
     to: 'authoritative',
     label: 'What is the IP for example.com?',
@@ -140,7 +140,7 @@ const steps: Step[] = [
   {
     id: 7,
     packet: 'RESPONSE',
-    description: 'The authoritative nameserver responds with the IP address for example.com.',
+    description: '权威名称服务器响应example.com的IP地址。',
     from: 'authoritative',
     to: 'resolver',
     label: 'example.com is at 93.184.216.34',
@@ -148,7 +148,7 @@ const steps: Step[] = [
   {
     id: 8,
     packet: 'RESPONSE',
-    description: 'The resolver returns the IP address to your computer, which can now connect to the website.',
+    description: '解析器将IP地址返回给您的计算机，现在可以连接到网站了。',
     from: 'resolver',
     to: 'client',
     label: 'example.com is at 93.184.216.34',
@@ -177,32 +177,32 @@ const DNSQuery = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const timerRef = useRef<number | null>(null);
-  
+
   const handlePlay = () => {
     setIsPlaying(true);
   };
-  
+
   const handlePause = () => {
     setIsPlaying(false);
   };
-  
+
   const handleReset = () => {
     setIsPlaying(false);
     setCurrentStep(0);
   };
-  
+
   const handleNext = () => {
     if (currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
     }
   };
-  
+
   const handlePrev = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
   };
-  
+
   useEffect(() => {
     if (isPlaying) {
       if (currentStep < steps.length) {
@@ -213,70 +213,70 @@ const DNSQuery = () => {
         setIsPlaying(false);
       }
     }
-    
+
     return () => {
       if (timerRef.current !== null) {
         clearTimeout(timerRef.current);
       }
     };
   }, [isPlaying, currentStep]);
-  
+
   // Determine which devices are highlighted in the current step
   const getHighlightedDevices = () => {
     if (currentStep === 0) return {};
-    
+
     const step = steps[currentStep - 1];
     return {
       [step.from]: true,
       [step.to]: true,
     };
   };
-  
+
   const highlightedDevices = getHighlightedDevices();
-  
+
   return (
     <>
       <Container>
         <DeviceGrid>
           <Device $highlighted={highlightedDevices.client}>
             <DeviceIcon>💻</DeviceIcon>
-            <DeviceLabel>Your Computer</DeviceLabel>
+            <DeviceLabel>您的计算机</DeviceLabel>
           </Device>
-          
+
           <Device $highlighted={highlightedDevices.resolver}>
             <DeviceIcon>🔍</DeviceIcon>
-            <DeviceLabel>DNS Resolver (ISP)</DeviceLabel>
+            <DeviceLabel>DNS解析器 (ISP)</DeviceLabel>
           </Device>
-          
+
           <Device $highlighted={highlightedDevices.root}>
             <DeviceIcon>🌐</DeviceIcon>
-            <DeviceLabel>Root Nameserver</DeviceLabel>
+            <DeviceLabel>根名称服务器</DeviceLabel>
           </Device>
-          
+
           <Device $highlighted={highlightedDevices.tld}>
             <DeviceIcon>📁</DeviceIcon>
-            <DeviceLabel>TLD Nameserver (.com)</DeviceLabel>
+            <DeviceLabel>TLD名称服务器 (.com)</DeviceLabel>
           </Device>
-          
+
           <Device $highlighted={highlightedDevices.authoritative} style={{ gridColumn: '1 / 3' }}>
             <DeviceIcon>🖥️</DeviceIcon>
-            <DeviceLabel>Authoritative Nameserver (example.com)</DeviceLabel>
+            <DeviceLabel>权威名称服务器 (example.com)</DeviceLabel>
           </Device>
         </DeviceGrid>
-        
+
         <AnimatePresence>
           {currentStep >= 1 && currentStep <= steps.length && (
             <PacketContainer
               key={steps[currentStep - 1].id}
-              initial={{ 
+              initial={{
                 x: getCoordinates(steps[currentStep - 1].from).x,
                 y: getCoordinates(steps[currentStep - 1].from).y,
-                opacity: 0 
+                opacity: 0
               }}
-              animate={{ 
+              animate={{
                 x: getCoordinates(steps[currentStep - 1].to).x,
                 y: getCoordinates(steps[currentStep - 1].to).y,
-                opacity: 1 
+                opacity: 1
               }}
               exit={{ opacity: 0 }}
               transition={{ duration: 2 }}
@@ -287,18 +287,18 @@ const DNSQuery = () => {
             </PacketContainer>
           )}
         </AnimatePresence>
-        
+
         <StepDescription>
           {currentStep === 0 ? (
-            'Click Play to start the DNS query process animation.'
+            '点击播放开始DNS查询过程动画。'
           ) : currentStep <= steps.length ? (
             steps[currentStep - 1].description
           ) : (
-            'DNS query process completed! The browser can now connect to the website. Click Reset to watch again.'
+            'DNS查询过程已完成！浏览器现在可以连接到网站。点击重置再次观看。'
           )}
         </StepDescription>
       </Container>
-      
+
       <AnimationControls
         isPlaying={isPlaying}
         onPlay={handlePlay}
@@ -309,25 +309,25 @@ const DNSQuery = () => {
         currentStep={currentStep === 0 ? 1 : currentStep}
         totalSteps={steps.length}
       />
-      
+
       {currentStep === steps.length && (
-        <InfoCard title="DNS Query Completed" type="success">
+        <InfoCard title="DNS查询已完成" type="success">
           <p>
-            The DNS query process is now complete. Your computer has received the IP address for
-            example.com and can now establish a connection to the website.
+            DNS查询过程现已完成。您的计算机已收到example.com的IP地址，
+            现在可以建立与网站的连接。
           </p>
           <p>
-            Key points about DNS:
+            关于DNS的要点：
           </p>
           <ul>
-            <li><strong>Hierarchical system</strong>: DNS uses a tree-like structure of nameservers</li>
-            <li><strong>Caching</strong>: DNS resolvers cache results to improve performance</li>
-            <li><strong>Distributed database</strong>: No single server contains all DNS information</li>
-            <li><strong>Critical infrastructure</strong>: DNS is essential for the functioning of the internet</li>
+            <li><strong>分层系统</strong>：DNS使用树状结构的名称服务器</li>
+            <li><strong>缓存</strong>：DNS解析器缓存结果以提高性能</li>
+            <li><strong>分布式数据库</strong>：没有单一服务器包含所有DNS信息</li>
+            <li><strong>关键基础设施</strong>：DNS对互联网的运行至关重要</li>
           </ul>
           <p>
-            DNS records have different types, including A (IPv4 address), AAAA (IPv6 address),
-            CNAME (canonical name/alias), MX (mail exchange), and many more.
+            DNS记录有不同类型，包括A（IPv4地址）、AAAA（IPv6地址）、
+            CNAME（规范名称/别名）、MX（邮件交换）等等。
           </p>
         </InfoCard>
       )}

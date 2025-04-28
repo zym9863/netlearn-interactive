@@ -22,37 +22,36 @@ const HTTPPage = () => {
   return (
     <>
       <PageHeader>
-        <Title>HTTP Protocol</Title>
+        <Title>HTTP 协议</Title>
         <Description>
-          Hypertext Transfer Protocol (HTTP) is the foundation of data communication on the World Wide Web.
-          It defines how messages are formatted and transmitted, and what actions web servers and browsers
-          should take in response to various commands.
+          超文本传输协议（HTTP）是万维网数据通信的基础。
+          它定义了消息如何格式化和传输，以及网络服务器和浏览器应该如何响应各种命令。
         </Description>
       </PageHeader>
-      
-      <InfoCard title="What is HTTP?">
+
+      <InfoCard title="什么是HTTP？">
         <p>
-          HTTP is an application layer protocol designed within the framework of the Internet protocol suite.
-          Its definition presumes an underlying and reliable transport layer protocol, such as TCP. HTTP is
-          a stateless protocol, meaning that the server does not keep any data (state) between two requests.
+          HTTP是在互联网协议套件框架内设计的应用层协议。
+          它的定义假设有一个底层的可靠传输层协议，如TCP。HTTP是
+          一个无状态协议，这意味着服务器在两个请求之间不保留任何数据（状态）。
         </p>
       </InfoCard>
-      
-      <InfoCard title="HTTP Request/Response Cycle" type="info">
+
+      <InfoCard title="HTTP请求/响应周期" type="info">
         <p>
-          The HTTP protocol works as a request-response protocol between a client and server:
+          HTTP协议作为客户端和服务器之间的请求-响应协议工作：
         </p>
         <ol>
-          <li><strong>Request</strong>: The client sends an HTTP request to the server.</li>
-          <li><strong>Processing</strong>: The server processes the request.</li>
-          <li><strong>Response</strong>: The server returns an HTTP response to the client.</li>
+          <li><strong>请求</strong>：客户端向服务器发送HTTP请求。</li>
+          <li><strong>处理</strong>：服务器处理请求。</li>
+          <li><strong>响应</strong>：服务器向客户端返回HTTP响应。</li>
         </ol>
         <p>
-          Each HTTP request contains a method (GET, POST, PUT, DELETE, etc.), headers, and sometimes a body.
-          Each HTTP response contains a status code, headers, and usually a body.
+          每个HTTP请求包含一个方法（GET、POST、PUT、DELETE等）、头部和有时包含主体。
+          每个HTTP响应包含一个状态码、头部和通常包含主体。
         </p>
       </InfoCard>
-      
+
       <HTTPRequest />
     </>
   );

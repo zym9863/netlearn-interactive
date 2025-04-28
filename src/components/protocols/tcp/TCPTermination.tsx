@@ -97,25 +97,25 @@ const steps: Step[] = [
   {
     id: 1,
     packet: 'FIN',
-    description: 'Client sends a FIN packet to the server, indicating it has no more data to send.',
+    description: '客户端向服务器发送FIN数据包，表示它没有更多数据要发送。',
     direction: 'client-to-server',
   },
   {
     id: 2,
     packet: 'ACK',
-    description: 'Server acknowledges the client\'s FIN with an ACK. The client-to-server connection is now closed.',
+    description: '服务器用ACK确认客户端的FIN。客户端到服务器的连接现已关闭。',
     direction: 'server-to-client',
   },
   {
     id: 3,
     packet: 'FIN',
-    description: 'Server sends its own FIN packet to the client, indicating it also has no more data to send.',
+    description: '服务器向客户端发送自己的FIN数据包，表示它也没有更多数据要发送。',
     direction: 'server-to-client',
   },
   {
     id: 4,
     packet: 'ACK',
-    description: 'Client acknowledges the server\'s FIN with an ACK. The connection is now fully closed.',
+    description: '客户端用ACK确认服务器的FIN。连接现已完全关闭。',
     direction: 'client-to-server',
   },
 ];
@@ -124,32 +124,32 @@ const TCPTermination = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const timerRef = useRef<number | null>(null);
-  
+
   const handlePlay = () => {
     setIsPlaying(true);
   };
-  
+
   const handlePause = () => {
     setIsPlaying(false);
   };
-  
+
   const handleReset = () => {
     setIsPlaying(false);
     setCurrentStep(0);
   };
-  
+
   const handleNext = () => {
     if (currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
     }
   };
-  
+
   const handlePrev = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
   };
-  
+
   useEffect(() => {
     if (isPlaying) {
       if (currentStep < steps.length) {
@@ -160,40 +160,40 @@ const TCPTermination = () => {
         setIsPlaying(false);
       }
     }
-    
+
     return () => {
       if (timerRef.current !== null) {
         clearTimeout(timerRef.current);
       }
     };
   }, [isPlaying, currentStep]);
-  
+
   return (
     <>
       <Container>
         <DeviceContainer>
           <Device>
             <DeviceIcon>💻</DeviceIcon>
-            <DeviceLabel>Client</DeviceLabel>
+            <DeviceLabel>客户端</DeviceLabel>
           </Device>
-          
+
           <Device>
             <DeviceIcon>🖥️</DeviceIcon>
-            <DeviceLabel>Server</DeviceLabel>
+            <DeviceLabel>服务器</DeviceLabel>
           </Device>
         </DeviceContainer>
-        
+
         <AnimatePresence>
           {currentStep >= 1 && currentStep <= steps.length && (
             <PacketContainer
               key={steps[currentStep - 1].id}
-              initial={{ 
+              initial={{
                 x: steps[currentStep - 1].direction === 'client-to-server' ? '20%' : '80%',
-                opacity: 0 
+                opacity: 0
               }}
-              animate={{ 
+              animate={{
                 x: steps[currentStep - 1].direction === 'client-to-server' ? '80%' : '20%',
-                opacity: 1 
+                opacity: 1
               }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.5 }}
@@ -212,18 +212,18 @@ const TCPTermination = () => {
             </PacketContainer>
           )}
         </AnimatePresence>
-        
+
         <StepDescription>
           {currentStep === 0 ? (
-            'Click Play to start the TCP four-way termination animation.'
+            '点击播放开始TCP四次挥手动画。'
           ) : currentStep <= steps.length ? (
             steps[currentStep - 1].description
           ) : (
-            'TCP connection terminated successfully! Click Reset to watch again.'
+            'TCP连接已成功终止！点击重置再次观看。'
           )}
         </StepDescription>
       </Container>
-      
+
       <AnimationControls
         isPlaying={isPlaying}
         onPlay={handlePlay}
@@ -234,22 +234,21 @@ const TCPTermination = () => {
         currentStep={currentStep === 0 ? 1 : currentStep}
         totalSteps={steps.length}
       />
-      
+
       {currentStep === steps.length && (
-        <InfoCard title="Connection Terminated" type="warning">
+        <InfoCard title="连接已终止" type="warning">
           <p>
-            The TCP four-way termination is now complete, and the connection has been fully closed.
-            This process ensures that both sides have finished sending data and have acknowledged
-            each other's termination requests.
+            TCP四次挥手现已完成，连接已完全关闭。
+            此过程确保双方都已完成数据发送并确认了对方的终止请求。
           </p>
           <p>
-            Key points about TCP connection termination:
+            关于TCP连接终止的要点：
           </p>
           <ul>
-            <li><strong>Half-closed state</strong>: After steps 1-2, the connection is half-closed (client to server)</li>
-            <li><strong>TIME_WAIT state</strong>: After sending the final ACK, the client enters a TIME_WAIT state</li>
-            <li><strong>Graceful shutdown</strong>: This process ensures all data is delivered before closing</li>
-            <li><strong>Resource release</strong>: System resources used by the connection are freed</li>
+            <li><strong>半关闭状态</strong>：在步骤1-2之后，连接处于半关闭状态（客户端到服务器）</li>
+            <li><strong>TIME_WAIT状态</strong>：发送最后的ACK后，客户端进入TIME_WAIT状态</li>
+            <li><strong>优雅关闭</strong>：此过程确保在关闭前传递所有数据</li>
+            <li><strong>资源释放</strong>：连接使用的系统资源被释放</li>
           </ul>
         </InfoCard>
       )}

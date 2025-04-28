@@ -39,7 +39,7 @@ const TabButton = styled.button<{ $active: boolean }>`
   font-size: ${theme.fontSizes.md};
   font-weight: ${props => props.$active ? '600' : '400'};
   transition: ${theme.transitions.default};
-  
+
   &:hover {
     background-color: ${props => props.$active ? theme.colors.primary : theme.colors.lightGray};
   }
@@ -47,71 +47,66 @@ const TabButton = styled.button<{ $active: boolean }>`
 
 const TCPPage = () => {
   const [activeTab, setActiveTab] = useState<'handshake' | 'termination'>('handshake');
-  
+
   return (
     <>
       <PageHeader>
-        <Title>TCP Protocol</Title>
+        <Title>TCP 协议</Title>
         <Description>
-          Transmission Control Protocol (TCP) is one of the main protocols of the Internet protocol suite.
-          It provides reliable, ordered, and error-checked delivery of data between applications running
-          on hosts communicating via an IP network.
+          传输控制协议（TCP）是互联网协议套件中的主要协议之一。
+          它提供了可靠的、有序的、经过错误检查的数据传输，用于通过IP网络通信的应用程序之间。
         </Description>
       </PageHeader>
-      
-      <InfoCard title="What is TCP?">
+
+      <InfoCard title="什么是TCP？">
         <p>
-          TCP is a connection-oriented protocol, which means a connection is established and maintained
-          until the application programs at each end have finished exchanging messages. It determines how
-          to break application data into packets that networks can deliver, sends packets to and accepts
-          packets from the network layer, manages flow control, and handles retransmission of dropped or
-          garbled packets as well as acknowledgment of all packets that arrive.
+          TCP是一种面向连接的协议，这意味着在应用程序完成消息交换之前，连接会被建立并保持。
+          它决定如何将应用数据分解成网络可传递的数据包，向网络层发送和接收数据包，
+          管理流量控制，并处理丢失或损坏的数据包的重传以及对所有到达的数据包的确认。
         </p>
       </InfoCard>
-      
+
       <TabContainer>
         <TabButtons>
           <TabButton
             $active={activeTab === 'handshake'}
             onClick={() => setActiveTab('handshake')}
           >
-            Three-Way Handshake
+            三次握手
           </TabButton>
           <TabButton
             $active={activeTab === 'termination'}
             onClick={() => setActiveTab('termination')}
           >
-            Four-Way Termination
+            四次挥手
           </TabButton>
         </TabButtons>
-        
+
         {activeTab === 'handshake' ? (
           <>
-            <InfoCard title="TCP Three-Way Handshake" type="info">
+            <InfoCard title="TCP三次握手" type="info">
               <p>
-                The TCP three-way handshake is the process used to establish a connection between a client
-                and server. It consists of three steps:
+                TCP三次握手是用于在客户端和服务器之间建立连接的过程。它包含三个步骤：
               </p>
               <ol>
-                <li><strong>SYN</strong>: Client sends a SYN packet to the server, requesting a connection.</li>
-                <li><strong>SYN-ACK</strong>: Server responds with a SYN-ACK packet, acknowledging the request.</li>
-                <li><strong>ACK</strong>: Client sends an ACK packet to the server, confirming the connection.</li>
+                <li><strong>SYN</strong>：客户端向服务器发送SYN数据包，请求连接。</li>
+                <li><strong>SYN-ACK</strong>：服务器用SYN-ACK数据包响应，确认请求。</li>
+                <li><strong>ACK</strong>：客户端向服务器发送ACK数据包，确认连接。</li>
               </ol>
             </InfoCard>
             <TCPHandshake />
           </>
         ) : (
           <>
-            <InfoCard title="TCP Four-Way Termination" type="info">
+            <InfoCard title="TCP四次挥手" type="info">
               <p>
-                The TCP four-way termination is the process used to close a connection between a client
-                and server. It consists of four steps:
+                TCP四次挥手是用于关闭客户端和服务器之间连接的过程。它包含四个步骤：
               </p>
               <ol>
-                <li><strong>FIN</strong>: Client sends a FIN packet to the server, requesting to close the connection.</li>
-                <li><strong>ACK</strong>: Server sends an ACK packet to acknowledge the FIN.</li>
-                <li><strong>FIN</strong>: Server sends its own FIN packet to the client.</li>
-                <li><strong>ACK</strong>: Client sends an ACK packet to acknowledge the server's FIN.</li>
+                <li><strong>FIN</strong>：客户端向服务器发送FIN数据包，请求关闭连接。</li>
+                <li><strong>ACK</strong>：服务器发送ACK数据包确认FIN。</li>
+                <li><strong>FIN</strong>：服务器向客户端发送自己的FIN数据包。</li>
+                <li><strong>ACK</strong>：客户端发送ACK数据包确认服务器的FIN。</li>
               </ol>
             </InfoCard>
             <TCPTermination />

@@ -91,37 +91,37 @@ const AnimationControls = ({
       {onPrev && (
         <Button onClick={onPrev} disabled={currentStep === 1 || isPlaying}>
           <ButtonIcon><FaStepBackward /></ButtonIcon>
-          <ButtonText>Prev</ButtonText>
+          <ButtonText>上一步</ButtonText>
         </Button>
       )}
 
       {isPlaying ? (
         <Button onClick={onPause}>
           <ButtonIcon><FaPause /></ButtonIcon>
-          <ButtonText>Pause</ButtonText>
+          <ButtonText>暂停</ButtonText>
         </Button>
       ) : (
         <Button onClick={onPlay}>
           <ButtonIcon><FaPlay /></ButtonIcon>
-          <ButtonText>Play</ButtonText>
+          <ButtonText>播放</ButtonText>
         </Button>
       )}
 
       <Button onClick={onReset}>
         <ButtonIcon><FaRedo /></ButtonIcon>
-        <ButtonText>Reset</ButtonText>
+        <ButtonText>重置</ButtonText>
       </Button>
 
       {onNext && (
         <Button onClick={onNext} disabled={currentStep === totalSteps || isPlaying}>
           <ButtonIcon><FaStepForward /></ButtonIcon>
-          <ButtonText>Next</ButtonText>
+          <ButtonText>下一步</ButtonText>
         </Button>
       )}
 
       {currentStep !== undefined && totalSteps !== undefined && (
         <StepInfo>
-          Step {currentStep} of {totalSteps}
+          步骤 {currentStep} / {totalSteps}
         </StepInfo>
       )}
     </ControlsContainer>
