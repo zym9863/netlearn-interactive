@@ -2,7 +2,7 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
-import { FaHome, FaNetworkWired, FaGlobe, FaServer } from 'react-icons/fa';
+import { FaHome, FaNetworkWired, FaGlobe, FaServer, FaLayerGroup } from 'react-icons/fa';
 import theme from '../styles/theme';
 
 interface LayoutProps {
@@ -113,6 +113,9 @@ const Layout = ({ children }: LayoutProps) => {
             </NavLink>
             <NavLink to="/dns" $active={location.pathname === '/dns'}>
               <FaServer /> DNS
+            </NavLink>
+            <NavLink to="/network-models" $active={location.pathname === '/network-models'}>
+              <FaLayerGroup /> 网络模型
             </NavLink>
           </Nav>
         </HeaderContent>

@@ -21,6 +21,7 @@ const theme = {
     tcpColor: '#3a86ff',
     httpColor: '#4361ee',
     dnsColor: '#00b4d8',
+    networkModelsColor: '#7209b7',
   },
   fonts: {
     body: "'Roboto', sans-serif",

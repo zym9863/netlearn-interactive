@@ -1,7 +1,7 @@
 // src/pages/HomePage.tsx
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { FaNetworkWired, FaGlobe, FaServer } from 'react-icons/fa';
+import { FaNetworkWired, FaGlobe, FaServer, FaLayerGroup } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import theme from '../styles/theme';
 
@@ -31,13 +31,14 @@ const Subtitle = styled(motion.p)`
 
 const ProtocolGrid = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   gap: ${theme.space.xl};
   margin-top: ${theme.space.xl};
   width: 100%;
+  max-width: 1000px;
 
-  @media (max-width: ${theme.breakpoints.lg}) {
+  @media (max-width: ${theme.breakpoints.md}) {
     flex-direction: column;
     align-items: center;
   }
@@ -54,8 +55,10 @@ const ProtocolCard = styled(motion(Link))`
   color: ${theme.colors.text};
   text-decoration: none;
   border: 1px solid ${theme.colors.lightGray};
-  width: 320px;
+  width: calc(50% - ${theme.space.lg});
+  max-width: 450px;
   flex-shrink: 0;
+  margin-bottom: ${theme.space.lg};
 
   &:hover {
     transform: translateY(-8px);
@@ -63,9 +66,9 @@ const ProtocolCard = styled(motion(Link))`
     color: ${theme.colors.text};
   }
 
-  @media (max-width: ${theme.breakpoints.lg}) {
+  @media (max-width: ${theme.breakpoints.md}) {
     width: 100%;
-    max-width: 500px;
+    max-width: 450px;
   }
 `;
 
@@ -204,7 +207,7 @@ const HomePage = () => {
           to="/dns"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           whileHover={{ scale: 1.03 }}
         >
           <CardImage $bgColor={theme.colors.dnsColor}>
@@ -218,6 +221,28 @@ const HomePage = () => {
             </CardTitle>
             <CardDescription>
               了解域名如何通过DNS查询过程解析
+            </CardDescription>
+          </CardContent>
+        </ProtocolCard>
+
+        <ProtocolCard
+          to="/network-models"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          whileHover={{ scale: 1.03 }}
+        >
+          <CardImage $bgColor={theme.colors.networkModelsColor}>
+            <CardIcon>
+              <FaLayerGroup />
+            </CardIcon>
+          </CardImage>
+          <CardContent>
+            <CardTitle>
+              网络分层模型
+            </CardTitle>
+            <CardDescription>
+              交互式浏览OSI和TCP/IP模型的层级、功能和协议
             </CardDescription>
           </CardContent>
         </ProtocolCard>
