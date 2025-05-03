@@ -6,11 +6,12 @@ An interactive web application for learning and visualizing network protocols th
 
 ## Overview
 
-NetLearn Interactive helps users understand fundamental network protocols through visual demonstrations and interactive simulations. The application covers three core protocols:
+NetLearn Interactive helps users understand fundamental network protocols through visual demonstrations and interactive simulations. The application covers the following topics:
 
 - **TCP Protocol**: Visualize the TCP three-way handshake and four-way termination processes
 - **HTTP Protocol**: Understand HTTP request and response flow with interactive examples
 - **DNS Protocol**: Learn how domain names are resolved through the DNS query process
+- **Network Models**: Explore OSI and TCP/IP layered models interactively, understanding each layer's functions, protocols, and PDUs
 
 ## Technologies Used
 
@@ -65,11 +66,17 @@ NetLearn Interactive helps users understand fundamental network protocols throug
 src/
 ├── assets/       # Static assets like images
 ├── components/   # Reusable UI components
+│   ├── protocols/   # Protocol-specific components
+│   │   ├── tcp/     # TCP protocol components
+│   │   ├── http/    # HTTP protocol components
+│   │   ├── dns/     # DNS protocol components
+│   │   └── models/  # Network models components
 ├── pages/        # Page components for each route
 │   ├── HomePage.tsx
 │   ├── TCPPage.tsx
 │   ├── HTTPPage.tsx
-│   └── DNSPage.tsx
+│   ├── DNSPage.tsx
+│   └── NetworkModelsPage.tsx
 ├── styles/       # Global styles and theme
 └── utils/        # Utility functions
 ```

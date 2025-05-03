@@ -6,11 +6,12 @@
 
 ## 概述
 
-NetLearn Interactive通过视觉演示和交互式模拟帮助用户理解基本网络协议。该应用程序涵盖了三个核心协议：
+NetLearn Interactive通过视觉演示和交互式模拟帮助用户理解基本网络协议。该应用程序涵盖了以下主题：
 
 - **TCP协议**：可视化TCP三次握手和四次挥手过程
 - **HTTP协议**：通过交互式示例了解HTTP请求和响应流程
 - **DNS协议**：学习域名如何通过DNS查询过程解析
+- **网络分层模型**：交互式探索OSI和TCP/IP分层模型，了解每层的功能、协议和数据单元(PDU)
 
 ## 使用的技术
 
@@ -65,11 +66,17 @@ NetLearn Interactive通过视觉演示和交互式模拟帮助用户理解基本
 src/
 ├── assets/       # 静态资源，如图片
 ├── components/   # 可复用UI组件
+│   ├── protocols/   # 协议特定组件
+│   │   ├── tcp/     # TCP协议组件
+│   │   ├── http/    # HTTP协议组件
+│   │   ├── dns/     # DNS协议组件
+│   │   └── models/  # 网络模型组件
 ├── pages/        # 每个路由的页面组件
 │   ├── HomePage.tsx
 │   ├── TCPPage.tsx
 │   ├── HTTPPage.tsx
-│   └── DNSPage.tsx
+│   ├── DNSPage.tsx
+│   └── NetworkModelsPage.tsx
 ├── styles/       # 全局样式和主题
 └── utils/        # 实用工具函数
 ```
